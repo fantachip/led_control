@@ -64,7 +64,7 @@ http.createServer(function(req, res){
 		res.writeHead(200, {"Content-type": "application/json"});
 	
 		var num = parseInt(query.query["num"]); 
-		if(num > 1){
+		if(num > 2){
 			res.end(JSON.stringify({"error": "There is no led connected to this slot right now!"}));
 			return; 
 		}

@@ -5,4 +5,8 @@ install:
 	make -C firmware install
 	
 run: 
-	(cd web && node ../server.js)
+	sudo rm -rf /tmp/server/
+	mkdir -p /tmp/server/
+	sudo cp -R * /tmp/server/
+	sudo chown -R guest:guest /tmp/server
+	(cd /tmp/server/web && sudo -u guest node ../server.js)

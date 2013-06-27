@@ -20,8 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define F_CPU 18432000UL
 
+#define LED_MASK 0x07
+
 void toggle_led(uint8_t num){
-	DDRC |= 0x3;
+	DDRC |= LED_MASK;
+	num &= LED_MASK; 
 	if(PORTC & _BV(num))
 		PORTC &= ~_BV(num);
 	else 
@@ -57,7 +60,7 @@ int main(){
 		if(UART_DataReady()){
 			uint8_t byte = UART_GetChar(); 
 			toggle_led(byte); 
-			UART_PutChar(PORTC & 0x03); 
+			UART_PutChar(PORTC & LED_MASK); 
 		}
 	} 
 	return 0; 
